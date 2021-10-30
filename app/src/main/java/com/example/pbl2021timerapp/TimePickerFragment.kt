@@ -12,7 +12,7 @@ class TimePickerFragment : DialogFragment(), TimePickerDialog.OnTimeSetListener 
         val c = Calendar.getInstance()
         val hour = c.get(Calendar.HOUR_OF_DAY)
         val minute = c.get(Calendar.MINUTE)
-        return TimePickerDialog(activity, this, hour, minute, false)
+        return TimePickerDialog(activity, this, hour, minute, true)
     }
 
     // Fragment から Activity 値を渡すには呼び出し元のメソッドを直接呼ぶ必要がある
