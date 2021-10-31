@@ -47,7 +47,7 @@ dependencies {
     implementation "androidx.room:room-runtime:${RoomVersion}"
     implementation "androidx.room:room-rxjava2:${RoomVersion}"
     implementation "androidx.room:room-rxjava3:${RoomVersion}"
-    implementation "ndroidx.room:room-guava:${RoomVersion}"
+    implementation "androidx.room:room-guava:${RoomVersion}"
     implementation "androidx.room:room-testing:${RoomVersion}"
     implementation "androidx.room:room-paging:2.4.0-beta01"
     testImplementation 'junit:junit:4.+'
