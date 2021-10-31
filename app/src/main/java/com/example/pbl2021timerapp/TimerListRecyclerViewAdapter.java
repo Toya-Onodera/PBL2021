@@ -70,7 +70,7 @@ public class TimerListRecyclerViewAdapter extends RecyclerView.Adapter<TimerList
     @Override
     public void onBindViewHolder(@NonNull TimerListRecyclerViewHolder holder, int position) {
         Map<String, Object> item = _listData.get(position);
-        String timeStr = (String) item.get("timeStr");
+        String timeStr = (String) item.get("time");
         holder.timeTextView.setText(timeStr);
     }
 
