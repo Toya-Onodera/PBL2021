@@ -1,6 +1,6 @@
 package com.example.pbl2021timerapp;
 
-public class SettingTimerData {
+public class TimerListRowData {
     private String time;
 
     public void setTime(String time) {

@@ -9,12 +9,11 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
-import java.util.Map;
 
 public class TimerListRecyclerViewAdapter extends RecyclerView.Adapter<TimerListRecyclerViewHolder> {
-    private List<Map<String, Object>> _listData;
+    private List<TimerListRowData> _listData;
 
-    public TimerListRecyclerViewAdapter(List<Map<String, Object>> listData) {
+    public TimerListRecyclerViewAdapter(List<TimerListRowData> listData) {
         _listData = listData;
     }
 
@@ -69,8 +68,8 @@ public class TimerListRecyclerViewAdapter extends RecyclerView.Adapter<TimerList
      */
     @Override
     public void onBindViewHolder(@NonNull TimerListRecyclerViewHolder holder, int position) {
-        Map<String, Object> item = _listData.get(position);
-        String timeStr = (String) item.get("time");
+        TimerListRowData item = _listData.get(position);
+        String timeStr = (String) item.getTime();
         holder.timeTextView.setText(timeStr);
     }
 
