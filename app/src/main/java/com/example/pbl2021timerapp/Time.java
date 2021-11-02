@@ -5,26 +5,27 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity
-public class SetTime {
+public class Time {
     @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "timer_id")
     private int id;
 
-    @ColumnInfo(name = "set_time_str")
-    private String setTimeStr;
+    @ColumnInfo(name = "time")
+    private String timeStr;
 
     public void setId(int id) {
         this.id = id;
     }
 
-    public void setSetTimeStr(String setTimeStr) {
-        this.setTimeStr = setTimeStr;
+    public void setTimeStr(String timeStr) {
+        this.timeStr = timeStr;
     }
 
     public int getId() {
         return id;
     }
 
-    public String getSetTimeStr() {
-        return setTimeStr;
+    public String getTimeStr() {
+        return timeStr;
     }
 }

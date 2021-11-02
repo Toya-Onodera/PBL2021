@@ -10,10 +10,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-public class TimerListRecyclerViewAdapter extends RecyclerView.Adapter<TimerListRecyclerViewHolder> {
-    private List<TimerListRowData> _listData;
+public class TimeRecyclerViewAdapter extends RecyclerView.Adapter<TimeRecyclerViewHolder> {
+    private List<Time> _listData;
 
-    public TimerListRecyclerViewAdapter(List<TimerListRowData> listData) {
+    public TimeRecyclerViewAdapter(List<Time> listData) {
         _listData = listData;
     }
 
@@ -39,10 +39,10 @@ public class TimerListRecyclerViewAdapter extends RecyclerView.Adapter<TimerList
      */
     @NonNull
     @Override
-    public TimerListRecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public TimeRecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.recycler_view_item, parent, false);
-        TimerListRecyclerViewHolder holder = new TimerListRecyclerViewHolder(view);
+        TimeRecyclerViewHolder holder = new TimeRecyclerViewHolder(view);
         return holder;
     }
 
@@ -67,9 +67,9 @@ public class TimerListRecyclerViewAdapter extends RecyclerView.Adapter<TimerList
      * @param position The position of the item within the adapter's data set.
      */
     @Override
-    public void onBindViewHolder(@NonNull TimerListRecyclerViewHolder holder, int position) {
-        TimerListRowData item = _listData.get(position);
-        String timeStr = (String) item.getTime();
+    public void onBindViewHolder(@NonNull TimeRecyclerViewHolder holder, int position) {
+        Time item = _listData.get(position);
+        String timeStr = (String) item.getTimeStr();
         holder.timeTextView.setText(timeStr);
     }
 
@@ -81,5 +81,10 @@ public class TimerListRecyclerViewAdapter extends RecyclerView.Adapter<TimerList
     @Override
     public int getItemCount() {
         return _listData.size();
+    }
+
+    void setTimes(List<Time> times) {
+        this._listData = times;
+        notifyDataSetChanged();
     }
 }

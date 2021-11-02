@@ -5,11 +5,11 @@ import android.content.Context;
 import androidx.room.Room;
 
 public class SetTimeDatabaseSingleton {
-    private static SetTimeDatabase instance = null;
+    private static TimeRoomDatabase instance = null;
 
-    public static SetTimeDatabase getInstance(Context context) {
+    public static TimeRoomDatabase getInstance(Context context) {
         if (instance != null) { return instance; }
-        instance = Room.databaseBuilder(context, SetTimeDatabase.class, "set-time").build();
+        instance = Room.databaseBuilder(context, TimeRoomDatabase.class, "set-time").build();
         return instance;
     }
 }
