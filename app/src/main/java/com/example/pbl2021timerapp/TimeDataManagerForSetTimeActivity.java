@@ -13,33 +13,19 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class TimeDataManager {
+public class TimeDataManagerForSetTimeActivity {
     private static final int INSERT = 1;
-    private static final int DELETE = 2;
-    private static final int READ = 100;
-    private static final int DELETE_ALL = 102;
 
     private TimeDao timeDao;
     private TimeRoomDatabase db;
 
     /**
-     * 全ユーザーのデータを格納する List 型オブジェクト。
-     */
-    private List<Time> times;
-
-    /**
      * 処理結果を通知する callback クラス。
      */
-    private TimeDataManagerCallback callback;
+    private TimeDataManagerCallbackForSetTimeActivity callback;
 
     /**
      * 非同期処理を行う worker スレッド用のシングルスレッド。
-     */
-
-    /**
-     * コンストラクタ
-     *
-     * @param context Application Context
      */
     private ExecutorService executorService = Executors.newSingleThreadExecutor();
 
@@ -48,12 +34,12 @@ public class TimeDataManager {
      *
      * @param context Application Context
      */
-    public TimeDataManager(Context context) {
+    public TimeDataManagerForSetTimeActivity(Context context) {
         db = TimeRoomDatabase.getDatabase(context);
         timeDao = db.TimeDao();
     }
 
-    public void setCallback(TimeDataManagerCallback callback) {
+    public void setCallback(TimeDataManagerCallbackForSetTimeActivity callback) {
         this.callback = callback;
         callback.setTimeDataManager(this);
     }
@@ -65,13 +51,6 @@ public class TimeDataManager {
      */
     public void insert(Time time) {
         asyncExecute(time, INSERT);
-    }
-
-    /**
-     * read処理
-     */
-    public void read() {
-        asyncRead();
     }
 
     /**
@@ -89,10 +68,6 @@ public class TimeDataManager {
                     case INSERT:
                         callback.onAddUserCompleted();
                         break;
-                    case DELETE:
-                    case DELETE_ALL:
-                        callback.onDeleteUserCompleted();
-                        break;
                     default:
                         break;
                 }
@@ -106,33 +81,7 @@ public class TimeDataManager {
     }
 
     /**
-     * 非同期でDB読み込みを行う
-     *
-     * @return 読み込み結果
-     */
-    @UiThread
-    private void asyncRead() {
-        //ワーカースレッドからDB読み込み結果を受け取る。
-        Handler handler = new Handler(Looper.getMainLooper()) {
-            @Override
-            public void handleMessage(@NonNull Message msg) {
-                if (msg.obj != null) {
-                    times = (List<Time>) msg.obj;
-
-                    // 処理が完了したら、callbackに処理を返す
-                    callback.onReadUserCompleted(times);
-                }
-            }
-        };
-
-        BackgroundTaskRead backgroundTaskRead = new BackgroundTaskRead(handler, timeDao, times);
-
-        // ワーカースレッドで実行する
-        executorService.submit(backgroundTaskRead);
-    }
-
-    /**
-     * insert, deleteの非同期処理を行うためのインナークラス
+     * insert の非同期処理を行うためのインナークラス
      */
     private static class BackgroundTask implements Runnable {
         private final Handler handler;
@@ -156,40 +105,9 @@ public class TimeDataManager {
                     timeDao.insert(time);
                     handler.sendMessage(handler.obtainMessage(INSERT));
                     break;
-                case DELETE:
-                    timeDao.delete(time);
-                    handler.sendMessage(handler.obtainMessage(DELETE));
-                    break;
-                case DELETE_ALL:
-                    timeDao.deleteAll();
-                    handler.sendMessage(handler.obtainMessage(DELETE_ALL));
-                    break;
                 default:
                     break;
             }
-        }
-    }
-
-    /**
-     * readの非同期処理を行うためのインナークラス
-     */
-    private static class BackgroundTaskRead implements Runnable {
-        private final Handler handler;
-        private TimeDao timeDao;
-        private List<Time> times;
-
-        BackgroundTaskRead(Handler handler, TimeDao timeDao, List<Time> times) {
-            this.handler = handler;
-            this.timeDao = timeDao;
-            this.times = times;
-        }
-
-        @WorkerThread
-        @Override
-        public void run() {
-            // 非同期処理を開始する
-            times = timeDao.loadTimes();
-            handler.sendMessage(handler.obtainMessage(READ, times));
         }
     }
 

@@ -10,8 +10,13 @@ import android.view.View;
 import java.util.List;
 
 public class TimerListActivity extends AppCompatActivity {
-    private TimeDataManager timeDataManager;
-    private TimeDataManagerCallback callback;
+    // DB 関連の動作を包括するクラス
+    private TimeDataManagerForTimeListActivity timeDataManager;
+
+    // DB 関連の動作で使用するコールバック
+    private TimeDataManagerCallbackForTimeListActivity callback;
+
+    // RecyclerView (一覧機能的なやつ)
     private RecyclerView.Adapter adapter;
 
     @Override
@@ -27,8 +32,8 @@ public class TimerListActivity extends AppCompatActivity {
 
         // Room を使用し、データを取得する
         // 取得後は RecyclerView を更新するコールバックが実行される
-        timeDataManager = new TimeDataManager(this);
-        callback = new TimeDataManagerCallback(this);
+        timeDataManager = new TimeDataManagerForTimeListActivity(this);
+        callback = new TimeDataManagerCallbackForTimeListActivity(this);
         timeDataManager.setCallback(callback);
         timeDataManager.read();
     }

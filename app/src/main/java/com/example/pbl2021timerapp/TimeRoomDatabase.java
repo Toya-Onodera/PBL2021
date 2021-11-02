@@ -30,7 +30,7 @@ public abstract class TimeRoomDatabase extends RoomDatabase {
                 if (timeRoomDatabase == null) {
                     // DBを作成する
                     timeRoomDatabase = Room.databaseBuilder(context.getApplicationContext(),
-                            TimeRoomDatabase.class, "time_database")
+                            TimeRoomDatabase.class, "time_database.db")
                             .build();
                 }
             }
