@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class TimerListActivity extends AppCompatActivity {
@@ -26,16 +25,8 @@ public class TimerListActivity extends AppCompatActivity {
             this.onButtonClick(view);
         });
 
-        // データのあれこれの処理を以下に記載する
-        // db = SetTimeDatabaseSingleton.getInstance(getApplicationContext());
-
-        // RecyclerView の処理を以下に記載する
-//        RecyclerView rv = (RecyclerView) findViewById(R.id.timerListRecyclerView);
-//        TimerListRecyclerViewAdapter adapter = new TimerListRecyclerViewAdapter(this.createDateset());
-//        LinearLayoutManager layout = new LinearLayoutManager(this);
-//        rv.setLayoutManager(layout);
-//        rv.setAdapter(adapter);
-
+        // Room を使用し、データを取得する
+        // 取得後は RecyclerView を更新するコールバックが実行される
         timeDataManager = new TimeDataManager(this);
         callback = new TimeDataManagerCallback(this);
         timeDataManager.setCallback(callback);
@@ -47,20 +38,8 @@ public class TimerListActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    // FIXME: ダミーデータを生成する動作になっているので実データに書き換える
-    private List<TimerListRowData> createDateset() {
-        List<TimerListRowData> dataset = new ArrayList<>();
-        for (int i = 0; i < 15; i++) {
-            TimerListRowData data = new TimerListRowData();
-            data.setTime("00:00");
-            dataset.add(data);
-        }
-
-        return dataset;
-    }
-
     /**
-     * DB読み込み完了後、RecyclerView を更新する
+     * DB 読み込み完了後、RecyclerView を更新する
      *
      * @param times DB から取得した SetTime
      */
