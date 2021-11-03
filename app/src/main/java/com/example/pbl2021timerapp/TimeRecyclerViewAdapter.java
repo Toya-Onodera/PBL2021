@@ -38,9 +38,4 @@ public class TimeRecyclerViewAdapter extends RecyclerView.Adapter<TimeRecyclerVi
                 ? times.size()
                 : 0;
     }
-
-    void setTimes(List<Time> times) {
-        this.times = times;
-        notifyDataSetChanged();
-    }
 }

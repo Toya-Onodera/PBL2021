@@ -59,6 +59,12 @@ public class TimerListActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        timeDataManager.read();
+    }
+
+    @Override
     protected void onDestroy() {
         // Activity 破棄のタイミングで DB を閉じる
         timeDataManager.closeDatabase();
