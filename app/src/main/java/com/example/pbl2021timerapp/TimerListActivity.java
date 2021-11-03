@@ -1,11 +1,11 @@
 package com.example.pbl2021timerapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 
 import java.util.List;
 
@@ -16,8 +16,8 @@ public class TimerListActivity extends AppCompatActivity {
     // DB 関連の動作で使用するコールバック
     private TimeDataManagerCallbackForTimeListActivity callback;
 
-    // RecyclerView (一覧機能的なやつ)
-    private RecyclerView.Adapter adapter;
+    // RecyclerView
+    private RecyclerView _rv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,8 +27,11 @@ public class TimerListActivity extends AppCompatActivity {
         // FAB をクリックしたときの処理を以下のコールバックで受け取る
         findViewById(R.id.openSetTimeActivityButton).setOnClickListener(view -> {
             // クリック時の処理
-            this.onButtonClick(view);
+            this.onButtonClick();
         });
+
+        // RecyclerView を取得する
+        _rv = (RecyclerView) findViewById(R.id.timerListRecyclerView);
 
         // Room を使用し、データを取得する
         // 取得後は RecyclerView を更新するコールバックが実行される
@@ -38,7 +41,7 @@ public class TimerListActivity extends AppCompatActivity {
         timeDataManager.read();
     }
 
-    private void onButtonClick(View view) {
+    private void onButtonClick() {
         Intent intent = new Intent(this, SetTimeActivity.class);
         startActivity(intent);
     }
@@ -49,9 +52,10 @@ public class TimerListActivity extends AppCompatActivity {
      * @param times DB から取得した SetTime
      */
     public void updateRecyclerView(List<Time> times) {
-        if (adapter instanceof TimeRecyclerViewAdapter) {
-            ((TimeRecyclerViewAdapter) adapter).setTimes(times);
-        }
+        TimeRecyclerViewAdapter adapter = new TimeRecyclerViewAdapter(times);
+        LinearLayoutManager layout = new LinearLayoutManager(this);
+        _rv.setLayoutManager(layout);
+        _rv.setAdapter(adapter);
     }
 
     @Override

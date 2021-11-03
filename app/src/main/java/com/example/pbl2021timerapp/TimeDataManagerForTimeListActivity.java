@@ -113,7 +113,7 @@ public class TimeDataManagerForTimeListActivity {
     }
 
     /**
-     * deleteの非同期処理を行うためのインナークラス
+     * delete の非同期処理を行うためのインナークラス
      */
     private static class BackgroundTask implements Runnable {
         private final Handler handler;
@@ -148,7 +148,7 @@ public class TimeDataManagerForTimeListActivity {
     }
 
     /**
-     * readの非同期処理を行うためのインナークラス
+     * read の非同期処理を行うためのインナークラス
      */
     private static class BackgroundTaskRead implements Runnable {
         private final Handler handler;
