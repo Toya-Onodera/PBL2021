@@ -1,4 +1,4 @@
-package com.example.pbl2021timerapp;
+package com.example.pbl2021timerapp.db.time;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;

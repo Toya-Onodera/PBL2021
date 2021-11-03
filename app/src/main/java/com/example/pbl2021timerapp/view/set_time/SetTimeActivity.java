@@ -1,4 +1,4 @@
-package com.example.pbl2021timerapp;
+package com.example.pbl2021timerapp.view.set_time;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
@@ -6,12 +6,17 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.pbl2021timerapp.R;
+import com.example.pbl2021timerapp.data_manager.set_time.TimeDataManagerCallback;
+import com.example.pbl2021timerapp.data_manager.set_time.TimeDataManager;
+import com.example.pbl2021timerapp.db.time.Time;
+
 public class SetTimeActivity extends AppCompatActivity {
     // DB 関連の動作を包括するクラス
-    private TimeDataManagerForSetTimeActivity timeDataManager;
+    private TimeDataManager timeDataManager;
 
     // DB 関連の動作で使用するコールバック
-    private TimeDataManagerCallbackForSetTimeActivity callback;
+    private TimeDataManagerCallback callback;
 
     // UI に使用するプロパティ
     private TextView setTimeTextView;
@@ -26,8 +31,8 @@ public class SetTimeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_set_time);
 
         // Room を使用し、データを挿入するための準備を行う
-        timeDataManager = new TimeDataManagerForSetTimeActivity(this);
-        callback = new TimeDataManagerCallbackForSetTimeActivity(this);
+        timeDataManager = new TimeDataManager(this);
+        callback = new TimeDataManagerCallback(this);
         timeDataManager.setCallback(callback);
 
         // 時間指定を行う際の処理を以下に実装する

@@ -1,4 +1,4 @@
-package com.example.pbl2021timerapp;
+package com.example.pbl2021timerapp.data_manager.timer_list;
 
 import android.content.Context;
 import android.os.Handler;
@@ -9,11 +9,15 @@ import androidx.annotation.NonNull;
 import androidx.annotation.UiThread;
 import androidx.annotation.WorkerThread;
 
+import com.example.pbl2021timerapp.db.time.Time;
+import com.example.pbl2021timerapp.db.time.TimeDao;
+import com.example.pbl2021timerapp.db.time.TimeRoomDatabase;
+
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class TimeDataManagerForTimeListActivity {
+public class TimeDataManager {
     private static final int DELETE = 2;
     private static final int READ = 100;
     private static final int DELETE_ALL = 102;
@@ -29,7 +33,7 @@ public class TimeDataManagerForTimeListActivity {
     /**
      * 処理結果を通知する callback クラス。
      */
-    private TimeDataManagerCallbackForTimeListActivity callback;
+    private TimeDataManagerCallback callback;
 
     /**
      * 非同期処理を行う worker スレッド用のシングルスレッド。
@@ -41,12 +45,12 @@ public class TimeDataManagerForTimeListActivity {
      *
      * @param context Application Context
      */
-    public TimeDataManagerForTimeListActivity(Context context) {
+    public TimeDataManager(Context context) {
         db = TimeRoomDatabase.getDatabase(context);
         timeDao = db.TimeDao();
     }
 
-    public void setCallback(TimeDataManagerCallbackForTimeListActivity callback) {
+    public void setCallback(TimeDataManagerCallback callback) {
         this.callback = callback;
         callback.setTimeDataManager(this);
     }

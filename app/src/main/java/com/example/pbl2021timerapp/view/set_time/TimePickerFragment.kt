@@ -1,4 +1,4 @@
-package com.example.pbl2021timerapp
+package com.example.pbl2021timerapp.view.set_time
 
 import android.app.Dialog
 import android.app.TimePickerDialog

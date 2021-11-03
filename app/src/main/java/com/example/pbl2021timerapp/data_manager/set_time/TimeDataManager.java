@@ -1,4 +1,4 @@
-package com.example.pbl2021timerapp;
+package com.example.pbl2021timerapp.data_manager.set_time;
 
 import android.content.Context;
 import android.os.Handler;
@@ -9,11 +9,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.UiThread;
 import androidx.annotation.WorkerThread;
 
-import java.util.List;
+import com.example.pbl2021timerapp.db.time.Time;
+import com.example.pbl2021timerapp.db.time.TimeDao;
+import com.example.pbl2021timerapp.db.time.TimeRoomDatabase;
+
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class TimeDataManagerForSetTimeActivity {
+public class TimeDataManager {
     private static final int INSERT = 1;
 
     private TimeDao timeDao;
@@ -22,7 +25,7 @@ public class TimeDataManagerForSetTimeActivity {
     /**
      * 処理結果を通知する callback クラス。
      */
-    private TimeDataManagerCallbackForSetTimeActivity callback;
+    private TimeDataManagerCallback callback;
 
     /**
      * 非同期処理を行う worker スレッド用のシングルスレッド。
@@ -34,12 +37,12 @@ public class TimeDataManagerForSetTimeActivity {
      *
      * @param context Application Context
      */
-    public TimeDataManagerForSetTimeActivity(Context context) {
+    public TimeDataManager(Context context) {
         db = TimeRoomDatabase.getDatabase(context);
         timeDao = db.TimeDao();
     }
 
-    public void setCallback(TimeDataManagerCallbackForSetTimeActivity callback) {
+    public void setCallback(TimeDataManagerCallback callback) {
         this.callback = callback;
         callback.setTimeDataManager(this);
     }

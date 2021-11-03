@@ -10,10 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PBL2021TimerApp">
         <activity
-            android:name=".SetTimeActivity"
+            android:name=".view.set_time.SetTimeActivity"
             android:exported="true" />
         <activity
-            android:name=".TimerListActivity"
+            android:name=".view.timer_tist.TimerListActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

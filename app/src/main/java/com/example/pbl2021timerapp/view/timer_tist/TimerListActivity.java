@@ -1,4 +1,4 @@
-package com.example.pbl2021timerapp;
+package com.example.pbl2021timerapp.view.timer_tist;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -7,14 +7,21 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.example.pbl2021timerapp.R;
+import com.example.pbl2021timerapp.data_manager.timer_list.TimeDataManagerCallback;
+import com.example.pbl2021timerapp.data_manager.timer_list.TimeDataManager;
+import com.example.pbl2021timerapp.db.time.Time;
+import com.example.pbl2021timerapp.view.set_time.SetTimeActivity;
+import com.example.pbl2021timerapp.view.set_time.TimeRecyclerViewAdapter;
+
 import java.util.List;
 
 public class TimerListActivity extends AppCompatActivity {
     // DB 関連の動作を包括するクラス
-    private TimeDataManagerForTimeListActivity timeDataManager;
+    private TimeDataManager timeDataManager;
 
     // DB 関連の動作で使用するコールバック
-    private TimeDataManagerCallbackForTimeListActivity callback;
+    private TimeDataManagerCallback callback;
 
     // RecyclerView
     private RecyclerView _rv;
@@ -35,8 +42,8 @@ public class TimerListActivity extends AppCompatActivity {
 
         // Room を使用し、データを取得する
         // 取得後は RecyclerView を更新するコールバックが実行される
-        timeDataManager = new TimeDataManagerForTimeListActivity(this);
-        callback = new TimeDataManagerCallbackForTimeListActivity(this);
+        timeDataManager = new TimeDataManager(this);
+        callback = new TimeDataManagerCallback(this);
         timeDataManager.setCallback(callback);
         timeDataManager.read();
     }
