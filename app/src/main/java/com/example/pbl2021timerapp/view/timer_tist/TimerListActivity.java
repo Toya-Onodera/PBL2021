@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -26,6 +27,12 @@ public class TimerListActivity extends AppCompatActivity {
     // RecyclerView
     private RecyclerView _rv;
 
+    private Context context;
+
+    public TimerListActivity () {
+
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +53,8 @@ public class TimerListActivity extends AppCompatActivity {
         callback = new TimeDataManagerCallback(this);
         timeDataManager.setCallback(callback);
         timeDataManager.read();
+
+        this.context = getApplicationContext();
     }
 
     private void onButtonClick() {
@@ -59,7 +68,7 @@ public class TimerListActivity extends AppCompatActivity {
      * @param times DB から取得した SetTime
      */
     public void updateRecyclerView(List<Time> times) {
-        TimeRecyclerViewAdapter adapter = new TimeRecyclerViewAdapter(times);
+        TimeRecyclerViewAdapter adapter = new TimeRecyclerViewAdapter(context, times);
         LinearLayoutManager layout = new LinearLayoutManager(this);
         _rv.setLayoutManager(layout);
         _rv.setAdapter(adapter);
