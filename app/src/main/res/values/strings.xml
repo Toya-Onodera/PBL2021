@@ -3,4 +3,6 @@
     <string name="button">SET</string>
     <string name="textView">00:00</string>
     <string name="alarmStyleText">アラーム</string>
+    <string name="dialog_title">たいとるですよ</string>
+    <string name="dialog_message">めっせーじですよ</string>
 </resources>
