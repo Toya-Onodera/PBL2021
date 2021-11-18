@@ -2,10 +2,13 @@ package com.example.pbl2021timerapp.view.set_time;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.pbl2021timerapp.MainActivity;
 import com.example.pbl2021timerapp.R;
 import com.example.pbl2021timerapp.data_manager.set_time.TimeDataManagerCallback;
 import com.example.pbl2021timerapp.data_manager.set_time.TimeDataManager;
@@ -21,6 +24,9 @@ public class SetTimeActivity extends AppCompatActivity {
     // UI に使用するプロパティ
     private TextView setTimeTextView;
     private Button setTimerButton;
+    private Button buttona;
+
+
 
     // 時間を文字列で保持するプロパティ
     private String timeStr = "00:00";
@@ -51,6 +57,17 @@ public class SetTimeActivity extends AppCompatActivity {
             saveTime.setTimeStr(timeStr);
             timeDataManager.insert(saveTime);
         });
+
+        buttona = findViewById(R.id.button);
+        buttona.setOnClickListener(view -> {
+            onButtonClick1();
+        });
+
+    }
+
+    private void onButtonClick1() {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 
     public void onReturnChooseTime(int hourOfDay, int minute) {
