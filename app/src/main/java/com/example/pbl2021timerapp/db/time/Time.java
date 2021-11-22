@@ -13,6 +13,9 @@ public class Time {
     @ColumnInfo(name = "time")
     private String timeStr;
 
+    @ColumnInfo(name="is_set")
+    private boolean isSet;
+
     public void setId(int id) {
         this.id = id;
     }
@@ -21,6 +24,8 @@ public class Time {
         this.timeStr = timeStr;
     }
 
+    public void setIsSet(boolean isSet ){ this.isSet = isSet; }
+
     public int getId() {
         return id;
     }
@@ -28,4 +33,6 @@ public class Time {
     public String getTimeStr() {
         return timeStr;
     }
+
+    public  boolean getIsSet(){return  isSet;}
 }
