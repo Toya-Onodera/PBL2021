@@ -42,5 +42,11 @@ public class GoTimerActivity extends AppCompatActivity {
             e1.printStackTrace();
         }
     }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mediaPlayer.stop();
+    }
 }
 
