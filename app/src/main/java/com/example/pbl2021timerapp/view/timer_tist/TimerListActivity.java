@@ -7,8 +7,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 
 import com.example.pbl2021timerapp.R;
+import com.example.pbl2021timerapp.RecordingCheckActivity;
 import com.example.pbl2021timerapp.data_manager.timer_list.TimeDataManagerCallback;
 import com.example.pbl2021timerapp.data_manager.timer_list.TimeDataManager;
 import com.example.pbl2021timerapp.db.time.Time;
@@ -29,7 +31,7 @@ public class TimerListActivity extends AppCompatActivity {
 
     private Context context;
 
-    public TimerListActivity () {
+    public TimerListActivity() {
 
     }
 
@@ -42,6 +44,11 @@ public class TimerListActivity extends AppCompatActivity {
         findViewById(R.id.openSetTimeActivityButton).setOnClickListener(view -> {
             // クリック時の処理
             this.onButtonClick();
+        });
+
+        findViewById(R.id.recordingOpenButton).setOnClickListener(view -> {
+            Intent intent = new Intent(this, RecordingCheckActivity.class);
+            startActivity(intent);
         });
 
         // RecyclerView を取得する
