@@ -8,17 +8,21 @@ import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Button;
 import android.widget.Toast;
 
 import java.io.IOException;
 
 public class GoTimerActivity extends AppCompatActivity {
     private MediaPlayer mediaPlayer;
+    private Button timerStopButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_go_timer);
+
+        timerStopButton = findViewById(R.id.timetStopTextButton);
 
         // MediaPlayer のインスタンス生成
         mediaPlayer = new MediaPlayer();
@@ -41,6 +45,10 @@ public class GoTimerActivity extends AppCompatActivity {
         } catch (IOException e1) {
             e1.printStackTrace();
         }
+
+        timerStopButton.setOnClickListener(v -> {
+            finish();
+        });
     }
 
     @Override

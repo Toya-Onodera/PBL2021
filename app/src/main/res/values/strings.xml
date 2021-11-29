@@ -3,4 +3,5 @@
     <string name="button">SET</string>
     <string name="textView">00:00</string>
     <string name="alarmStyleText">アラーム</string>
+    <string name="stopAlarmButtonText">アラーム停止</string>
 </resources>
