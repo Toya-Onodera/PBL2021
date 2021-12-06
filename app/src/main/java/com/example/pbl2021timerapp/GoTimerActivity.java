@@ -141,6 +141,10 @@ public class GoTimerActivity extends AppCompatActivity {
         @Override
         public void onError(int error) {
             Log.e("TAG", "onError: " + RecognizerUtil.getErrorMessage(error));
+
+            if (error == SpeechRecognizer.ERROR_NO_MATCH) {
+                startRecognition();
+            }
         }
 
         @Override
