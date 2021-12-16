@@ -12,8 +12,11 @@ import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.TextView;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class GoTimerActivity extends AppCompatActivity {
@@ -23,12 +26,16 @@ public class GoTimerActivity extends AppCompatActivity {
     private SpeechRecognizer speechRecognizer;
     private SpeechRecognizer mRecognizer;
 
+    private TextView speechPreviewText;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_go_timer);
 
         timerStopButton = findViewById(R.id.timetStopTextButton);
+        speechPreviewText = findViewById(R.id.speechPreviewText);
 
         // MediaPlayer のインスタンス生成
         mediaPlayer = new MediaPlayer();
@@ -46,7 +53,7 @@ public class GoTimerActivity extends AppCompatActivity {
 
             // 音声再生準備と再生
             mediaPlayer.prepare();
-            mediaPlayer.start();
+
 
         } catch (IOException e1) {
             e1.printStackTrace();
@@ -79,6 +86,7 @@ public class GoTimerActivity extends AppCompatActivity {
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_PREFERENCE, lang);
         intent.putExtra(RecognizerIntent.EXTRA_ONLY_RETURN_LANGUAGE_PREFERENCE, lang);
         intent.putExtra(RecognizerIntent.EXTRA_MAX_RESULTS, 1);
+        intent.putExtra(RecognizerIntent.EXTRA_PARTIAL_RESULTS, true);
         mRecognizer.startListening(intent);
     }
 
@@ -90,7 +98,8 @@ public class GoTimerActivity extends AppCompatActivity {
          */
         @Override
         public void onReadyForSpeech(Bundle params) {
-
+            speechPreviewText.setText("声を発してください。");
+            mediaPlayer.start();
         }
 
         /**
@@ -149,7 +158,22 @@ public class GoTimerActivity extends AppCompatActivity {
 
         @Override
         public void onResults(Bundle results) {
-            finish();
+
+            //
+            List<String> recData = results
+                    .getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
+
+            String getData = "";
+            for (String s : recData) {
+                getData += s ;
+            }
+
+            speechPreviewText.setText(getData);
+            Log.v("onResults",getData);
+
+            if(getData.equals("こんにちは")) {
+                finish();
+            }
         }
 
         /**
@@ -166,6 +190,21 @@ public class GoTimerActivity extends AppCompatActivity {
          */
         @Override
         public void onPartialResults(Bundle partialResults) {
+
+            List<String> recData = partialResults
+                    .getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
+
+            String getData = "";
+            for (String s : recData) {
+                getData += s ;
+            }
+
+            speechPreviewText.setText(getData);
+            Log.v("onPartialResults",getData);
+
+            if(getData.equals("こんにちは")) {
+                finish();
+            }
 
         }
 

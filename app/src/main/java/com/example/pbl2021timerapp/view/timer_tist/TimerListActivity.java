@@ -12,7 +12,10 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.speech.SpeechRecognizer;
+import android.util.Log;
 import android.widget.Button;
 
 import com.example.pbl2021timerapp.R;
@@ -78,6 +81,44 @@ public class TimerListActivity extends AppCompatActivity {
         timeDataManager.read();
 
         this.context = getApplicationContext();
+    }
+
+    public Boolean checkRecordable(){
+        if(!SpeechRecognizer.isRecognitionAvailable(getApplicationContext())) {
+            return false;
+        }
+        if (Build.VERSION.SDK_INT >= 23) {
+            if(ActivityCompat.checkSelfPermission(this,
+                    Manifest.permission.RECORD_AUDIO)
+                    != PackageManager.PERMISSION_GRANTED)
+            {
+                ActivityCompat.requestPermissions(this,
+                        new String[]{
+                                Manifest.permission.RECORD_AUDIO
+                        },
+                        REQUEST_CODE);
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public void onRequestPermissionsResult(
+            int requestCode, String[] permission, int[] grantResults
+    ){
+        Log.d("MainActivity","onRequestPermissionsResult");
+
+        if (grantResults.length <= 0) { return; }
+//        switch(requestCode){
+//            case REQUEST_CODE:
+//                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+//                    mText.setText("");
+//                } else {
+//
+//                }
+//                break;
+//        }
     }
 
     private void onButtonClick() {
