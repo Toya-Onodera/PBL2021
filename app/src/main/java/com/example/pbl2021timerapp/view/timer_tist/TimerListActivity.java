@@ -18,6 +18,7 @@ import android.speech.SpeechRecognizer;
 import android.util.Log;
 import android.widget.Button;
 
+import com.example.pbl2021timerapp.CotohaApiTestActivity;
 import com.example.pbl2021timerapp.R;
 import com.example.pbl2021timerapp.RecordingCheckActivity;
 import com.example.pbl2021timerapp.data_manager.timer_list.TimeDataManagerCallback;
@@ -66,7 +67,7 @@ public class TimerListActivity extends AppCompatActivity {
         });
 
         findViewById(R.id.recordingOpenButton).setOnClickListener(view -> {
-            Intent intent = new Intent(this, RecordingCheckActivity.class);
+            Intent intent = new Intent(this, CotohaApiTestActivity.class);
             startActivity(intent);
         });
 
