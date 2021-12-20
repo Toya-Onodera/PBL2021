@@ -9,14 +9,18 @@
 
     <Button
         android:id="@+id/timetStopTextButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="149dp"
+        android:layout_height="92dp"
         android:backgroundTint="#000000"
         android:text="@string/stopAlarmButtonText"
+        android:textSize="26sp"
+        android:background="@drawable/frame_style"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.733" />
 
     <TextView
         android:id="@+id/speechPreviewText"
