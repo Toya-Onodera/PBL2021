@@ -34,7 +34,7 @@ public class GoTimerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_go_timer);
 
-        timerStopButton = findViewById(R.id.timetStopTextButton);
+        timerStopButton = findViewById(R.id.timerStopTextButton);
         speechPreviewText = findViewById(R.id.speechPreviewText);
 
         // MediaPlayer のインスタンス生成

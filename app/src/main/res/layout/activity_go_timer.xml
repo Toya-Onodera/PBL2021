@@ -8,13 +8,13 @@
     tools:context=".GoTimerActivity">
 
     <Button
-        android:id="@+id/timetStopTextButton"
+        android:id="@+id/timerStopTextButton"
         android:layout_width="149dp"
         android:layout_height="92dp"
-        android:backgroundTint="#000000"
         android:text="@string/stopAlarmButtonText"
         android:textSize="26sp"
         android:background="@drawable/frame_style"
+        app:backgroundTint="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -27,7 +27,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/timetStopTextButton"
+        app:layout_constraintBottom_toTopOf="@+id/timerStopTextButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

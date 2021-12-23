@@ -4,9 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#E53935"
-    android:backgroundTint="#232323"
-    android:foregroundTint="#FFFFFF">
+    android:background="@drawable/stroke_style"
+    android:foregroundTint="#696969">
+<!--    android:background="#E53935"-->
+<!--    android:backgroundTint="#232323"-->
+<!--    android:foregroundTint="#FFFFFF"-->
+
 
   <TextView
       android:id="@+id/setTimeTextView"
@@ -39,10 +42,13 @@
       android:layout_marginEnd="24dp"
       android:minWidth="48dp"
       android:minHeight="48dp"
-      android:showText="false"
-      android:textColor="#FFFFFF"
+      android:showText="true"
       app:layout_constraintBottom_toBottomOf="parent"
+
+
       app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintTop_toTopOf="parent" />
+      app:layout_constraintTop_toTopOf="parent"
+      app:thumbTint="#3949AB"
+      app:trackTint="#FFFFFF" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
