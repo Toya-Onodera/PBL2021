@@ -3,12 +3,14 @@ package com.example.pbl2021timerapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.pbl2021timerapp.cotoha.CotohaApiManagerCallbacks;
 import com.example.pbl2021timerapp.cotoha.CotohaApiManeger;
 
-public class CotohaApiTestActivity extends AppCompatActivity {
+public class CotohaApiTestActivity extends AppCompatActivity implements CotohaApiManagerCallbacks {
     private CotohaApiManeger cotohaApiManeger;
     private Button cotohaSendButton;
     private TextView answerCotohaText;
@@ -19,7 +21,7 @@ public class CotohaApiTestActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cotoha_api_test);
 
-        cotohaApiManeger = new CotohaApiManeger();
+        cotohaApiManeger = new CotohaApiManeger(this);
 
         answerCotohaText = findViewById(R.id.answerCotohaText);
         inputCotohaText = findViewById(R.id.inputCotohaText);
@@ -31,5 +33,11 @@ public class CotohaApiTestActivity extends AppCompatActivity {
                     inputCotohaText.getText().toString()
             );
         });
+    }
+
+    @Override
+    public void onTaskFinished(float score) {
+        // TODO: score を使用してタイマーを止める動作を追加できそう
+        Log.d("score(callback)", Float.toString(score));
     }
 }

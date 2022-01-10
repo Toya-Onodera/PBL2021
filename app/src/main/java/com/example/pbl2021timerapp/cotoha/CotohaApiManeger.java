@@ -1,8 +1,6 @@
 package com.example.pbl2021timerapp.cotoha;
 
-import android.content.Context;
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.annotation.UiThread;
 import androidx.annotation.WorkerThread;
@@ -22,6 +20,8 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class CotohaApiManeger {
+    private CotohaApiManagerCallbacks cotohaApiManagerCallbacks = null;
+
     private Gson gson = new Gson();
     private String cotohaBearerToken;
     private String accessTokenUrl = "https://api.ce-cotoha.com/v1/oauth/accesstokens";
@@ -29,18 +29,21 @@ public class CotohaApiManeger {
     private String clientId = BuildConfig.COTOHA_API_CLIENT_ID;
     private String clientSecret = BuildConfig.COTOHA_API_CLIENT_SECRET;
 
-    public CotohaApiManeger() {
+    public CotohaApiManeger(CotohaApiManagerCallbacks cotohaApiManagerCallbacks) {
+        // コールバックを登録する
+        this.cotohaApiManagerCallbacks = cotohaApiManagerCallbacks;
+
         // Bearer Token が必要なので、始めに取得する
         GetBearerTokenBackgroundTask cotohaBearerTokenGetBackgroundReceiver = new GetBearerTokenBackgroundTask();
         ExecutorService executorService = Executors.newSingleThreadExecutor();
         executorService.submit(cotohaBearerTokenGetBackgroundReceiver);
     }
 
-    @UiThread
+//    @UiThread
     public void getSimilarity(String s1, String s2) {
-        GetSimilarityBackgroundTask getBearerTokenBackgroundTask = new GetSimilarityBackgroundTask(s1, s2);
+        GetSimilarityBackgroundTask getSimilarityBackgroundTask = new GetSimilarityBackgroundTask(s1, s2);
         ExecutorService executorService = Executors.newSingleThreadExecutor();
-        executorService.submit(getBearerTokenBackgroundTask);
+        executorService.submit(getSimilarityBackgroundTask);
     }
 
     /**
@@ -67,7 +70,6 @@ public class CotohaApiManeger {
 
                 JsonObject cotohaBearerJson = gson.fromJson(originalResponseBody, JsonObject.class);
                 cotohaBearerToken = cotohaBearerJson.get("access_token").toString().replace("\"", "");
-                Log.d("cotohaBearerTokenStr", cotohaBearerToken);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -106,9 +108,11 @@ public class CotohaApiManeger {
                 String originalResponseBody = response.body().string();
                 JsonObject similarityObject = gson.fromJson(originalResponseBody, JsonObject.class);
                 String score = similarityObject.getAsJsonObject("result").get("score").toString();
-                Log.d("score", score);
+                cotohaApiManagerCallbacks.onTaskFinished(Float.parseFloat(score));
             } catch (IOException e) {
                 e.printStackTrace();
+            } finally {
+                Log.d("GetSimilarityBackgroundTask", "finish");
             }
         }
     }
