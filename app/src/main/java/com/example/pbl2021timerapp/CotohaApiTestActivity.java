@@ -28,8 +28,7 @@ public class CotohaApiTestActivity extends AppCompatActivity {
         cotohaSendButton.setOnClickListener(view -> {
             cotohaApiManeger.getSimilarity(
                     answerCotohaText.getText().toString(),
-                    inputCotohaText.getText().toString(),
-                    getApplicationContext()
+                    inputCotohaText.getText().toString()
             );
         });
     }

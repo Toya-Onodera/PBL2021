@@ -22,6 +22,7 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class CotohaApiManeger {
+    private Gson gson = new Gson();
     private String cotohaBearerToken;
     private String accessTokenUrl = "https://api.ce-cotoha.com/v1/oauth/accesstokens";
     private String similarityUrl = "https://api.ce-cotoha.com/api/dev/nlp/v1/similarity";
@@ -36,8 +37,8 @@ public class CotohaApiManeger {
     }
 
     @UiThread
-    public void getSimilarity(String s1, String s2, Context context) {
-        GetSimilarityBackgroundTask getBearerTokenBackgroundTask = new GetSimilarityBackgroundTask(s1, s2, context);
+    public void getSimilarity(String s1, String s2) {
+        GetSimilarityBackgroundTask getBearerTokenBackgroundTask = new GetSimilarityBackgroundTask(s1, s2);
         ExecutorService executorService = Executors.newSingleThreadExecutor();
         executorService.submit(getBearerTokenBackgroundTask);
     }
@@ -48,7 +49,6 @@ public class CotohaApiManeger {
     private class GetBearerTokenBackgroundTask implements Runnable {
         @Override
         public void run() {
-            Gson gson = new Gson();
             JsonObject jsonObj = new JsonObject();
             jsonObj.addProperty("grantType", "client_credentials");
             jsonObj.addProperty("clientId", clientId);
@@ -56,7 +56,7 @@ public class CotohaApiManeger {
 
             OkHttpClient client = new OkHttpClient();
             MediaType JSON = MediaType.get("application/json; charset=utf-8");
-            RequestBody body = RequestBody.create(JSON, jsonObj.toString());
+            RequestBody body = RequestBody.create(jsonObj.toString(), JSON);
             Request request = new Request.Builder()
                     .url(accessTokenUrl)
                     .post(body)
@@ -80,25 +80,22 @@ public class CotohaApiManeger {
     private class GetSimilarityBackgroundTask implements Runnable {
         private String s1;
         private String s2;
-        private Context context;
 
-        public GetSimilarityBackgroundTask(String s1, String s2, Context context) {
+        public GetSimilarityBackgroundTask(String s1, String s2) {
             this.s1 = s1;
             this.s2 = s2;
-            this.context = context;
         }
 
         @WorkerThread
         @Override
         public void run() {
-            Gson gson = new Gson();
             JsonObject jsonObj = new JsonObject();
             jsonObj.addProperty("s1", s1);
             jsonObj.addProperty("s2", s2);
 
             OkHttpClient client = new OkHttpClient();
             MediaType JSON = MediaType.get("application/json; charset=utf-8");
-            RequestBody body = RequestBody.create(JSON, jsonObj.toString());
+            RequestBody body = RequestBody.create(jsonObj.toString(), JSON);
             Request request = new Request.Builder()
                     .url(similarityUrl)
                     .post(body)
@@ -107,17 +104,9 @@ public class CotohaApiManeger {
 
             try (Response response = client.newCall(request).execute()) {
                 String originalResponseBody = response.body().string();
-                JsonObject cotohaSimilarity = gson.fromJson(originalResponseBody, JsonObject.class);
-
-                Log.d("aaa", originalResponseBody);
-                String resultObjectStr = cotohaSimilarity.get("result").toString();
-                Log.d("ccc", resultObjectStr);
-                JsonObject result = gson.fromJson(resultObjectStr, JsonObject.class);
-                System.out.println(result);
-                String score = result.get("score").toString();
-                Log.d("bbb", score);
-
-                Toast.makeText(context, score, Toast.LENGTH_LONG).show();
+                JsonObject similarityObject = gson.fromJson(originalResponseBody, JsonObject.class);
+                String score = similarityObject.getAsJsonObject("result").get("score").toString();
+                Log.d("score", score);
             } catch (IOException e) {
                 e.printStackTrace();
             }
