@@ -16,11 +16,9 @@ import android.os.Build;
 import android.os.Bundle;
 import android.speech.SpeechRecognizer;
 import android.util.Log;
-import android.widget.Button;
 
-import com.example.pbl2021timerapp.CotohaApiTestActivity;
+import com.example.pbl2021timerapp.GoTimerActivity;
 import com.example.pbl2021timerapp.R;
-import com.example.pbl2021timerapp.RecordingCheckActivity;
 import com.example.pbl2021timerapp.data_manager.timer_list.TimeDataManagerCallback;
 import com.example.pbl2021timerapp.data_manager.timer_list.TimeDataManager;
 import com.example.pbl2021timerapp.db.time.Time;
@@ -43,10 +41,6 @@ public class TimerListActivity extends AppCompatActivity {
 
     static final int REQUEST_CODE = 1;
 
-    public TimerListActivity() {
-
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,7 +61,7 @@ public class TimerListActivity extends AppCompatActivity {
         });
 
         findViewById(R.id.recordingOpenButton).setOnClickListener(view -> {
-            Intent intent = new Intent(this, CotohaApiTestActivity.class);
+            Intent intent = new Intent(this, GoTimerActivity.class);
             startActivity(intent);
         });
 

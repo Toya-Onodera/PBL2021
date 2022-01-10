@@ -79,7 +79,7 @@ public class GoTimerActivity extends AppCompatActivity {
         mRecognizer = SpeechRecognizer.createSpeechRecognizer(this);
         mRecognizer.setRecognitionListener(mRecognitionListener);
 
-        // 英語で音声入力
+        // 日本語で音声入力
         Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         String lang = "ja_JP.utf8";
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, lang);
