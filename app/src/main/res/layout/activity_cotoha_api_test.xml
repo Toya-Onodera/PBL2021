@@ -7,7 +7,7 @@
     tools:context=".CotohaApiTestActivity">
 
     <EditText
-        android:id="@+id/anserCotohaText"
+        android:id="@+id/answerCotohaText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="80dp"
