@@ -20,7 +20,7 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class CotohaApiManeger {
-    private CotohaApiManagerCallbacks cotohaApiManagerCallbacks = null;
+    private CotohaApiManagerCallbacks cotohaApiManagerCallbacks;
 
     private Gson gson = new Gson();
     private String cotohaBearerToken;
@@ -39,7 +39,7 @@ public class CotohaApiManeger {
         executorService.submit(cotohaBearerTokenGetBackgroundReceiver);
     }
 
-//    @UiThread
+    @UiThread
     public void getSimilarity(String s1, String s2) {
         GetSimilarityBackgroundTask getSimilarityBackgroundTask = new GetSimilarityBackgroundTask(s1, s2);
         ExecutorService executorService = Executors.newSingleThreadExecutor();
