@@ -8,10 +8,10 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.pbl2021timerapp.cotoha.CotohaApiManagerCallbacks;
-import com.example.pbl2021timerapp.cotoha.CotohaApiManeger;
+import com.example.pbl2021timerapp.cotoha.CotohaApiManager;
 
 public class CotohaApiTestActivity extends AppCompatActivity implements CotohaApiManagerCallbacks {
-    private CotohaApiManeger cotohaApiManeger;
+    private CotohaApiManager cotohaApiManager;
     private Button cotohaSendButton;
     private TextView answerCotohaText;
     private TextView inputCotohaText;
@@ -21,14 +21,14 @@ public class CotohaApiTestActivity extends AppCompatActivity implements CotohaAp
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cotoha_api_test);
 
-        cotohaApiManeger = new CotohaApiManeger(this);
+        cotohaApiManager = new CotohaApiManager(this);
 
         answerCotohaText = findViewById(R.id.answerCotohaText);
         inputCotohaText = findViewById(R.id.inputCotohaText);
         cotohaSendButton = findViewById(R.id.cotohaSendButton);
 
         cotohaSendButton.setOnClickListener(view -> {
-            cotohaApiManeger.getSimilarity(
+            cotohaApiManager.getSimilarity(
                     answerCotohaText.getText().toString(),
                     inputCotohaText.getText().toString()
             );

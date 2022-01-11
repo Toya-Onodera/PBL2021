@@ -19,7 +19,7 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class CotohaApiManeger {
+public class CotohaApiManager {
     private CotohaApiManagerCallbacks cotohaApiManagerCallbacks;
 
     private Gson gson = new Gson();
@@ -29,7 +29,7 @@ public class CotohaApiManeger {
     private String clientId = BuildConfig.COTOHA_API_CLIENT_ID;
     private String clientSecret = BuildConfig.COTOHA_API_CLIENT_SECRET;
 
-    public CotohaApiManeger(CotohaApiManagerCallbacks cotohaApiManagerCallbacks) {
+    public CotohaApiManager(CotohaApiManagerCallbacks cotohaApiManagerCallbacks) {
         // コールバックを登録する
         this.cotohaApiManagerCallbacks = cotohaApiManagerCallbacks;
 
