@@ -4,17 +4,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.widget.Toast;
 
-import com.example.pbl2021timerapp.view.set_time.SetTimeActivity;
-
 public class AlarmBroadcastReceiver extends BroadcastReceiver
 {
     @Override
     public void onReceive(Context context, Intent intent) {
         Toast.makeText(context, "Received ", Toast.LENGTH_LONG).show();
 
-        Intent i = new Intent();
-        i.setClassName("com.example.pbl2021timerapp", "com.example.pbl2021timerapp.view.go_timer.GoTimerActivity");
-        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        context.startActivity(i);
+        Intent _intent = new Intent();
+        _intent.setClassName("com.example.pbl2021timerapp", "com.example.pbl2021timerapp.view.go_timer.GoTimerActivity");
+        _intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(_intent);
     }
 }

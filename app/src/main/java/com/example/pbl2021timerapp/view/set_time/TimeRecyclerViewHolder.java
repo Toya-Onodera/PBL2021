@@ -1,11 +1,7 @@
 package com.example.pbl2021timerapp.view.set_time;
 
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.provider.AlarmClock;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,7 +19,5 @@ public class TimeRecyclerViewHolder extends RecyclerView.ViewHolder {
 
         // タイマー切り替えスイッチを押した動作を以下に記載
         switchCompat = itemView.findViewById(R.id.timerSetSwitch);
-
     }
-
 }

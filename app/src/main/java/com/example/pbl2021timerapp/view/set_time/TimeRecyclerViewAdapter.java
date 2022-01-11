@@ -39,7 +39,7 @@ public class TimeRecyclerViewAdapter extends RecyclerView.Adapter<TimeRecyclerVi
     @Override
     public void onBindViewHolder(@NonNull TimeRecyclerViewHolder holder, int position) {
         Time item = times.get(position);
-        String timeStr = (String) item.getTimeStr();
+        String timeStr = item.getTimeStr();
         holder.timeTextView.setText(timeStr);
 
         holder.switchCompat.setOnCheckedChangeListener((buttonView, isChecked) -> {
@@ -49,27 +49,15 @@ public class TimeRecyclerViewAdapter extends RecyclerView.Adapter<TimeRecyclerVi
                 int hour = Integer.parseInt(times[0]);
                 int minute = Integer.parseInt(times[1]);
 
+                try {
+                    Toast.makeText(holder.itemView.getContext(), String.format("%d時%d分にアラームをセットしました", hour, minute), Toast.LENGTH_SHORT).show();
 
-                Toast.makeText(holder.itemView.getContext(), String.format("%d時%d分にアラームをセットしました", hour, minute) , Toast.LENGTH_SHORT).show();
-//                Intent intent = new Intent(AlarmClock.ACTION_SET_ALARM)
-//                        .putExtra(AlarmClock.EXTRA_MESSAGE, "alarm")
-//                        .putExtra(AlarmClock.EXTRA_HOUR, 17)
-//                        .putExtra(AlarmClock.EXTRA_MINUTES, 41);
-
-                Intent intent = new Intent(context, AlarmBroadcastReceiver.class);
-                PendingIntent alarmIntent = PendingIntent.getBroadcast(holder.itemView.getContext(), 0, intent, 0);
-                alarmManager.set(AlarmManager.RTC_WAKEUP, 3000, alarmIntent);
-
-//                Calendar calendar = Calendar.getInstance();
-//                calendar.setTimeInMillis(System.currentTimeMillis());
-//                calendar.set(Calendar.HOUR_OF_DAY, 17);
-//                calendar.set(Calendar.MINUTE, 17);
-//
-//                alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP,calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, alarmIntent);
-
-//                if (intent.resolveActivity(context.getPackageManager()) != null) {
-//                    context.startActivity(intent);
-//               }
+                    Intent activityIntent = new Intent(context, AlarmBroadcastReceiver.class);
+                    PendingIntent alarmIntent = PendingIntent.getBroadcast(holder.itemView.getContext(), 0, activityIntent, PendingIntent.FLAG_IMMUTABLE);
+                    alarmManager.set(AlarmManager.RTC_WAKEUP, 3000, alarmIntent);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
     }

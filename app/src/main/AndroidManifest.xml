@@ -36,7 +36,7 @@
         </activity>
 
         <receiver
-            android:name=".AlarmBroadcastReceiver"
+            android:name=".view.go_timer.AlarmBroadcastReceiver"
             android:process=":remote" />
     </application>
 
