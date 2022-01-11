@@ -1,4 +1,4 @@
-package com.example.pbl2021timerapp;
+package com.example.pbl2021timerapp.view.go_timer;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.pbl2021timerapp.R;
 import com.example.pbl2021timerapp.media_manager.MediaManager;
 import com.example.pbl2021timerapp.recognizer.SpeechRecognizerManager;
 

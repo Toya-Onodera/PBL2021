@@ -1,4 +1,4 @@
-package com.example.pbl2021timerapp;
+package com.example.pbl2021timerapp.view.debug_test;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,6 +9,9 @@ import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
 import android.util.Log;
 import android.widget.TextView;
+
+import com.example.pbl2021timerapp.R;
+import com.example.pbl2021timerapp.recognizer.RecognizerUtil;
 
 import java.util.ArrayList;
 

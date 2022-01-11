@@ -4,9 +4,6 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.provider.AlarmClock;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,13 +12,10 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.pbl2021timerapp.AlarmBroadcastReceiver;
-import com.example.pbl2021timerapp.GoTimerActivity;
+import com.example.pbl2021timerapp.view.go_timer.AlarmBroadcastReceiver;
 import com.example.pbl2021timerapp.R;
 import com.example.pbl2021timerapp.db.time.Time;
-import com.example.pbl2021timerapp.view.timer_tist.TimerListActivity;
 
-import java.util.Calendar;
 import java.util.List;
 
 public class TimeRecyclerViewAdapter extends RecyclerView.Adapter<TimeRecyclerViewHolder> {

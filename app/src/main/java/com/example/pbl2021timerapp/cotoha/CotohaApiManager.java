@@ -47,7 +47,7 @@ public class CotohaApiManager {
     }
 
     /**
-     * Bearer Token を非同期通信で取得するインナークラス
+     * Bearer Token を非同期通信で取得するインナークラスxzwx
      */
     private class GetBearerTokenBackgroundTask implements Runnable {
         @Override

@@ -17,7 +17,7 @@ import android.os.Bundle;
 import android.speech.SpeechRecognizer;
 import android.util.Log;
 
-import com.example.pbl2021timerapp.GoTimerActivity;
+import com.example.pbl2021timerapp.view.go_timer.GoTimerActivity;
 import com.example.pbl2021timerapp.R;
 import com.example.pbl2021timerapp.data_manager.timer_list.TimeDataManagerCallback;
 import com.example.pbl2021timerapp.data_manager.timer_list.TimeDataManager;

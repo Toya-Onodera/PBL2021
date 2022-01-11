@@ -1,4 +1,4 @@
-package com.example.pbl2021timerapp;
+package com.example.pbl2021timerapp.recognizer;
 
 import android.speech.SpeechRecognizer;
 
@@ -26,5 +26,4 @@ public class RecognizerUtil {
         }
         return "Unknown error";
     }
-
 }

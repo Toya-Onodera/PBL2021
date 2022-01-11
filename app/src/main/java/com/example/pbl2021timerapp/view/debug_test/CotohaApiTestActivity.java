@@ -1,4 +1,4 @@
-package com.example.pbl2021timerapp;
+package com.example.pbl2021timerapp.view.debug_test;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,6 +7,7 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.pbl2021timerapp.R;
 import com.example.pbl2021timerapp.cotoha.CotohaApiManagerCallbacks;
 import com.example.pbl2021timerapp.cotoha.CotohaApiManager;
 

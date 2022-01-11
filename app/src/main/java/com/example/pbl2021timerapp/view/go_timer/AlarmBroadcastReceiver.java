@@ -1,4 +1,4 @@
-package com.example.pbl2021timerapp;
+package com.example.pbl2021timerapp.view.go_timer;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -13,7 +13,7 @@ public class AlarmBroadcastReceiver extends BroadcastReceiver
         Toast.makeText(context, "Received ", Toast.LENGTH_LONG).show();
 
         Intent i = new Intent();
-        i.setClassName("com.example.pbl2021timerapp", "com.example.pbl2021timerapp.GoTimerActivity");
+        i.setClassName("com.example.pbl2021timerapp", "com.example.pbl2021timerapp.view.go_timer.GoTimerActivity");
         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(i);
     }

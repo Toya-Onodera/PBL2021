@@ -10,8 +10,6 @@ import android.speech.SpeechRecognizer;
 import android.util.Log;
 import android.widget.TextView;
 
-import com.example.pbl2021timerapp.RecognizerUtil;
-
 import java.util.List;
 
 public class SpeechRecognizerManager {

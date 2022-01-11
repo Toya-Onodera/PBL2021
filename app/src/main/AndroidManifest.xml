@@ -15,13 +15,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PBL2021TimerApp">
         <activity
-            android:name=".CotohaApiTestActivity"
+            android:name=".view.debug_test.CotohaApiTestActivity"
             android:exported="true" />
         <activity
-            android:name=".RecordingCheckActivity"
+            android:name=".view.debug_test.RecordingCheckActivity"
             android:exported="true" />
         <activity
-            android:name=".GoTimerActivity"
+            android:name=".view.go_timer.GoTimerActivity"
             android:exported="true" />
         <activity
             android:name=".view.set_time.SetTimeActivity"
