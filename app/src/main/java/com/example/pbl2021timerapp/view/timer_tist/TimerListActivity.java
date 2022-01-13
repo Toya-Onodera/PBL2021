@@ -65,10 +65,10 @@ public class TimerListActivity extends AppCompatActivity {
             this.onButtonClick();
         });
 
-        findViewById(R.id.recordingOpenButton).setOnClickListener(view -> {
-            Intent intent = new Intent(this, RecordingCheckActivity.class);
-            startActivity(intent);
-        });
+//        findViewById(R.id.recordingOpenButton).setOnClickListener(view -> {
+//            Intent intent = new Intent(this, RecordingCheckActivity.class);
+//            startActivity(intent);
+//        });
 
         // RecyclerView を取得する
         _rv = (RecyclerView) findViewById(R.id.timerListRecyclerView);

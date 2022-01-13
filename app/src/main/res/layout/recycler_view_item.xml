@@ -5,10 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/stroke_style"
-    android:foregroundTint="#696969">
-<!--    android:background="#E53935"-->
-<!--    android:backgroundTint="#232323"-->
-<!--    android:foregroundTint="#FFFFFF"-->
+    android:foregroundTint="#1D2349">
+  <!--    android:background="#E53935"-->
+  <!--    android:backgroundTint="#232323"-->
+  <!--    android:foregroundTint="#FFFFFF"-->
 
 
   <TextView
@@ -43,12 +43,18 @@
       android:minWidth="48dp"
       android:minHeight="48dp"
       android:showText="true"
+      android:textColorHint="#000000"
+      android:thumb="@android:drawable/btn_star_big_on"
       app:layout_constraintBottom_toBottomOf="parent"
-
-
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintTop_toTopOf="parent"
-      app:thumbTint="#3949AB"
-      app:trackTint="#FFFFFF" />
+      app:thumbTint="#FDD835"
+      app:track="@drawable/stroke_style"
+      app:trackTint="#D81B60"
+      app:trackTintMode="add" />
+
+  <!--  app:trackTint="#FFFFFF"-->
+
+  <!--      android:trackTint="@drawable/button_color"-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
