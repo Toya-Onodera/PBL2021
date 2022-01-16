@@ -7,11 +7,11 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.pbl2021timerapp.R;
-import com.example.pbl2021timerapp.cotoha.CotohaApiManager;
-import com.example.pbl2021timerapp.cotoha.CotohaApiManagerCallbacks;
+import com.example.pbl2021timerapp.cotoha_manager.CotohaApiManager;
+import com.example.pbl2021timerapp.cotoha_manager.CotohaApiManagerCallbacks;
 import com.example.pbl2021timerapp.media_manager.MediaManager;
-import com.example.pbl2021timerapp.recognizer.SpeechRecognizerManager;
-import com.example.pbl2021timerapp.recognizer.SpeechRecognizerManagerCallbacks;
+import com.example.pbl2021timerapp.recognizer_manager.SpeechRecognizerManager;
+import com.example.pbl2021timerapp.recognizer_manager.SpeechRecognizerManagerCallbacks;
 
 public class GoTimerActivity extends AppCompatActivity implements SpeechRecognizerManagerCallbacks, CotohaApiManagerCallbacks {
     private Button timerStopButton;

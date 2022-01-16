@@ -8,8 +8,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.pbl2021timerapp.R;
-import com.example.pbl2021timerapp.cotoha.CotohaApiManagerCallbacks;
-import com.example.pbl2021timerapp.cotoha.CotohaApiManager;
+import com.example.pbl2021timerapp.cotoha_manager.CotohaApiManagerCallbacks;
+import com.example.pbl2021timerapp.cotoha_manager.CotohaApiManager;
 
 public class CotohaApiTestActivity extends AppCompatActivity implements CotohaApiManagerCallbacks {
     private CotohaApiManager cotohaApiManager;

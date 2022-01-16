@@ -11,7 +11,7 @@ import android.util.Log;
 import android.widget.TextView;
 
 import com.example.pbl2021timerapp.R;
-import com.example.pbl2021timerapp.recognizer.RecognizerUtil;
+import com.example.pbl2021timerapp.recognizer_manager.RecognizerUtil;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package com.example.pbl2021timerapp.cotoha;
+package com.example.pbl2021timerapp.cotoha_manager;
 
 import androidx.annotation.UiThread;
 import androidx.annotation.WorkerThread;

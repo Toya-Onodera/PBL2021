@@ -1,6 +1,5 @@
-package com.example.pbl2021timerapp.recognizer;
+package com.example.pbl2021timerapp.recognizer_manager;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;

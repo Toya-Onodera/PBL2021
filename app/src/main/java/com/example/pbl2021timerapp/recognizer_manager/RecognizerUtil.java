@@ -1,4 +1,4 @@
-package com.example.pbl2021timerapp.recognizer;
+package com.example.pbl2021timerapp.recognizer_manager;
 
 import android.speech.SpeechRecognizer;
 
