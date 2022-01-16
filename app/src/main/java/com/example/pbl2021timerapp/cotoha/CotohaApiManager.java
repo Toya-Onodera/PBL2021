@@ -1,7 +1,5 @@
 package com.example.pbl2021timerapp.cotoha;
 
-import android.util.Log;
-
 import androidx.annotation.UiThread;
 import androidx.annotation.WorkerThread;
 
@@ -108,11 +106,9 @@ public class CotohaApiManager {
                 String originalResponseBody = response.body().string();
                 JsonObject similarityObject = gson.fromJson(originalResponseBody, JsonObject.class);
                 String score = similarityObject.getAsJsonObject("result").get("score").toString();
-                cotohaApiManagerCallbacks.onTaskFinished(Float.parseFloat(score));
+                cotohaApiManagerCallbacks.onSimilarityTaskFinished(Float.parseFloat(score));
             } catch (IOException e) {
                 e.printStackTrace();
-            } finally {
-                Log.d("GetSimilarityBackgroundTask", "finish");
             }
         }
     }

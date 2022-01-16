@@ -13,11 +13,13 @@ import android.widget.TextView;
 import java.util.List;
 
 public class SpeechRecognizerManager {
+    private SpeechRecognizerManagerCallbacks speechRecognizerManagerCallbacks;
     private Context context;
     private SpeechRecognizer speechRecognizer;
     private TextView textView;
 
-    public SpeechRecognizerManager(Context context, TextView textView) {
+    public SpeechRecognizerManager(SpeechRecognizerManagerCallbacks speechRecognizerManagerCallbacks, Context context, TextView textView) {
+        this.speechRecognizerManagerCallbacks = speechRecognizerManagerCallbacks;
         this.context = context;
         this.textView = textView;
         speechRecognizer = SpeechRecognizer.createSpeechRecognizer(context);
@@ -121,9 +123,7 @@ public class SpeechRecognizerManager {
             Log.v("onResults", getData);
             changeText(getData);
 
-            if (getData.equals("こんにちは")) {
-                ((Activity) context).finish();
-            }
+            speechRecognizerManagerCallbacks.onSpeechRecognizerFinished(getData);
         }
 
         /**

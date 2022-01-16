@@ -37,7 +37,7 @@ public class CotohaApiTestActivity extends AppCompatActivity implements CotohaAp
     }
 
     @Override
-    public void onTaskFinished(float score) {
+    public void onSimilarityTaskFinished(float score) {
         // TODO: score を使用してタイマーを止める動作を追加できそう
         Log.d("score(callback)", Float.toString(score));
     }
