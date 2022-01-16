@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.pbl2021timerapp.R;
 import com.example.pbl2021timerapp.cotoha.CotohaApiManager;
@@ -48,16 +47,16 @@ public class GoTimerActivity extends AppCompatActivity implements SpeechRecogniz
         super.onDestroy();
         mediaManager.stop();
         speechRecognizerManager.destory();
-
     }
 
     @Override
     public void onSpeechRecognizerFinished(String resultStr) {
-        Toast.makeText(this, resultStr, Toast.LENGTH_SHORT).show();
-        cotohaApiManager.getSimilarity(
-                "こんにちは",
-                resultStr
-        );
+        if (resultStr != "") {
+            cotohaApiManager.getSimilarity(
+                    "こんにちは",
+                    resultStr
+            );
+        }
     }
 
     @Override

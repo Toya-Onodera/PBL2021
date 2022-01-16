@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.pbl2021timerapp"
-        minSdk 24
+        minSdk 26
         targetSdk 31
         versionCode 1
         versionName "1.0"
@@ -34,7 +34,6 @@ android {
 ext {
     SupportLibVersion = "28.0.0"
     RoomVersion = "2.3.0"
-
 }
 
 dependencies {

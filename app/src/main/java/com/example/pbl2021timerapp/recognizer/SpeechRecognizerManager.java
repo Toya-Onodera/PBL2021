@@ -115,12 +115,7 @@ public class SpeechRecognizerManager {
         public void onResults(Bundle results) {
             List<String> recData = results.getStringArrayList(android.speech.SpeechRecognizer.RESULTS_RECOGNITION);
 
-            String getData = "";
-            for (String s : recData) {
-                getData += s;
-            }
-
-            Log.v("onResults", getData);
+            String getData = String.join("", recData);
             changeText(getData);
 
             speechRecognizerManagerCallbacks.onSpeechRecognizerFinished(getData);
@@ -142,17 +137,10 @@ public class SpeechRecognizerManager {
         public void onPartialResults(Bundle partialResults) {
             List<String> recData = partialResults.getStringArrayList(android.speech.SpeechRecognizer.RESULTS_RECOGNITION);
 
-            String getData = "";
-            for (String s : recData) {
-                getData += s;
-            }
-
-            Log.v("onPartialResults", getData);
+            String getData = String.join("", recData);
             changeText(getData);
 
-            if (getData.equals("こんにちは")) {
-                ((Activity) context).finish();
-            }
+            speechRecognizerManagerCallbacks.onSpeechRecognizerFinished(getData);
         }
 
         /**
