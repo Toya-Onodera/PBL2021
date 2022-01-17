@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.pbl2021timerapp.R;
 import com.example.pbl2021timerapp.cotoha_manager.CotohaApiManager;
@@ -19,12 +18,15 @@ import com.example.pbl2021timerapp.recognizer_manager.SpeechRecognizerManagerCal
 
 public class GoTimerActivity extends AppCompatActivity implements JapanNewsManagerCallbacks, SpeechRecognizerManagerCallbacks, CotohaApiManagerCallbacks {
     private Button timerStopButton;
-    private TextView speechPreviewText;
+    private TextView answerTextView;
+    private TextView speechPreviewTextView;
 
     private MediaManager mediaManager = null;
     private SpeechRecognizerManager speechRecognizerManager = null;
     private CotohaApiManager cotohaApiManager = null;
     private JapanNewsManager japanNewsManager = null;
+
+    private String answerText = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,21 +34,19 @@ public class GoTimerActivity extends AppCompatActivity implements JapanNewsManag
         setContentView(R.layout.activity_go_timer);
 
         timerStopButton = findViewById(R.id.timetStopTextButton);
-        speechPreviewText = findViewById(R.id.speechPreviewText);
+        answerTextView = findViewById(R.id.answerText);
+        speechPreviewTextView = findViewById(R.id.speechPreviewText);
 
         timerStopButton.setOnClickListener(v -> {
             finish();
         });
 
         japanNewsManager = new JapanNewsManager(this);
-
         mediaManager = new MediaManager(this, "01.mp3");
-        mediaManager.start();
-
-        speechRecognizerManager = new SpeechRecognizerManager(this, this, speechPreviewText);
-        speechRecognizerManager.start();
-
+        speechRecognizerManager = new SpeechRecognizerManager(this, this, speechPreviewTextView);
         cotohaApiManager = new CotohaApiManager(this);
+
+        japanNewsManager.start();
     }
 
     @Override
@@ -58,14 +58,19 @@ public class GoTimerActivity extends AppCompatActivity implements JapanNewsManag
 
     @Override
     public void onReceivedNewsData(String speechText) {
-        Log.d("speechText", speechText);
+        mediaManager.start();
+        speechRecognizerManager.start();
+
+        // FIXME: 習得したニュースタイトルの受け渡しができていない
+        answerText = speechText;
+        answerTextView.setText(speechText);
     }
 
     @Override
     public void onSpeechRecognizerFinished(String resultStr) {
         if (resultStr != "") {
             cotohaApiManager.getSimilarity(
-                    "こんにちは",
+                    answerText,
                     resultStr
             );
         }

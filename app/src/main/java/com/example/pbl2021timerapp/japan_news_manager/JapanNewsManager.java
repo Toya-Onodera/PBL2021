@@ -19,7 +19,9 @@ public class JapanNewsManager {
 
     public JapanNewsManager(JapanNewsManagerCallbacks japanNewsManagerCallbacks) {
         _japanNewsManagerCallbacks = japanNewsManagerCallbacks;
+    }
 
+    public void start() {
         GetJapanNewsBackgroundTask getJapanNewsBackgroundTask = new GetJapanNewsBackgroundTask();
         ExecutorService executorService = Executors.newSingleThreadExecutor();
         executorService.submit(getJapanNewsBackgroundTask);
