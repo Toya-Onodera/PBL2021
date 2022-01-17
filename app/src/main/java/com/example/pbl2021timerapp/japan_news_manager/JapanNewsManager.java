@@ -1,5 +1,11 @@
 package com.example.pbl2021timerapp.japan_news_manager;
 
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
+
+import androidx.annotation.NonNull;
+
 import com.example.pbl2021timerapp.BuildConfig;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -14,15 +20,29 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class JapanNewsManager {
+    private final int GET_TEXT = 1;
+
     private JapanNewsManagerCallbacks _japanNewsManagerCallbacks;
-    private String randomSpeechText;
 
     public JapanNewsManager(JapanNewsManagerCallbacks japanNewsManagerCallbacks) {
         _japanNewsManagerCallbacks = japanNewsManagerCallbacks;
     }
 
     public void start() {
-        GetJapanNewsBackgroundTask getJapanNewsBackgroundTask = new GetJapanNewsBackgroundTask();
+        Handler handler = new Handler(Looper.getMainLooper()) {
+            @Override
+            public void handleMessage(@NonNull Message msg) {
+                switch (msg.what) {
+                    case GET_TEXT:
+                        _japanNewsManagerCallbacks.onReceivedNewsData((String) msg.obj);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        };
+
+        GetJapanNewsBackgroundTask getJapanNewsBackgroundTask = new GetJapanNewsBackgroundTask(handler);
         ExecutorService executorService = Executors.newSingleThreadExecutor();
         executorService.submit(getJapanNewsBackgroundTask);
     }
@@ -31,11 +51,17 @@ public class JapanNewsManager {
      * 日本のトップニュースを取得するインナークラス
      */
     private class GetJapanNewsBackgroundTask implements Runnable {
+        private final Handler handler;
+
         private Gson gson = new Gson();
         private String newsApiUrl = "https://newsapi.org/v2/top-headlines";
         private String country = "jp";
         private String[] category = {"business", "entertainment", "health", "science", "sports", "technology"};
         private String apiKey = BuildConfig.NEWS_API_KEY;
+
+        public GetJapanNewsBackgroundTask(Handler handler) {
+            this.handler = handler;
+        }
 
         @Override
         public void run() {
@@ -52,8 +78,8 @@ public class JapanNewsManager {
                 String originalResponseBody = response.body().string();
 
                 JsonObject japanNewsJson = gson.fromJson(originalResponseBody, JsonObject.class);
-                randomSpeechText = japanNewsJson.getAsJsonArray("articles").get(0).getAsJsonObject().get("title").toString();
-                _japanNewsManagerCallbacks.onReceivedNewsData(randomSpeechText);
+                String randomSpeechText = japanNewsJson.getAsJsonArray("articles").get(0).getAsJsonObject().get("title").toString();
+                handler.sendMessage(handler.obtainMessage(GET_TEXT, randomSpeechText));
             } catch (IOException e) {
                 e.printStackTrace();
             }
