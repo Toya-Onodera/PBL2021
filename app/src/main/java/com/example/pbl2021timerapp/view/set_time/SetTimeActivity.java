@@ -49,6 +49,7 @@ public class SetTimeActivity extends AppCompatActivity {
             // TODO: DB に保存する処理を書く
             Time saveTime = new Time();
             saveTime.setTimeStr(timeStr);
+            saveTime.setIsSet(false);
             timeDataManager.insert(saveTime);
         });
     }

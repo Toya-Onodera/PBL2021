@@ -1,12 +1,23 @@
 package com.example.pbl2021timerapp.view.timer_tist;
 
+import static android.Manifest.permission.RECORD_AUDIO;
+
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.speech.SpeechRecognizer;
+import android.util.Log;
 
+import com.example.pbl2021timerapp.view.go_timer.GoTimerActivity;
 import com.example.pbl2021timerapp.R;
 import com.example.pbl2021timerapp.data_manager.timer_list.TimeDataManagerCallback;
 import com.example.pbl2021timerapp.data_manager.timer_list.TimeDataManager;
@@ -26,15 +37,32 @@ public class TimerListActivity extends AppCompatActivity {
     // RecyclerView
     private RecyclerView _rv;
 
+    private Context context;
+
+    static final int REQUEST_CODE = 1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        int granted = ContextCompat.checkSelfPermission(this, RECORD_AUDIO);
+        if (PackageManager.PERMISSION_GRANTED != granted) {
+            ActivityCompat.requestPermissions(this, new String[]{
+                    Manifest.permission.CAMERA
+            }, REQUEST_CODE);
+
+        }
+
         // FAB をクリックしたときの処理を以下のコールバックで受け取る
         findViewById(R.id.openSetTimeActivityButton).setOnClickListener(view -> {
             // クリック時の処理
             this.onButtonClick();
+        });
+
+        findViewById(R.id.recordingOpenButton).setOnClickListener(view -> {
+            Intent intent = new Intent(this, GoTimerActivity.class);
+            startActivity(intent);
         });
 
         // RecyclerView を取得する
@@ -46,6 +74,46 @@ public class TimerListActivity extends AppCompatActivity {
         callback = new TimeDataManagerCallback(this);
         timeDataManager.setCallback(callback);
         timeDataManager.read();
+
+        this.context = getApplicationContext();
+    }
+
+    public Boolean checkRecordable(){
+        if(!SpeechRecognizer.isRecognitionAvailable(getApplicationContext())) {
+            return false;
+        }
+        if (Build.VERSION.SDK_INT >= 23) {
+            if(ActivityCompat.checkSelfPermission(this,
+                    Manifest.permission.RECORD_AUDIO)
+                    != PackageManager.PERMISSION_GRANTED)
+            {
+                ActivityCompat.requestPermissions(this,
+                        new String[]{
+                                Manifest.permission.RECORD_AUDIO
+                        },
+                        REQUEST_CODE);
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public void onRequestPermissionsResult(
+            int requestCode, String[] permission, int[] grantResults
+    ){
+        Log.d("MainActivity","onRequestPermissionsResult");
+
+        if (grantResults.length <= 0) { return; }
+//        switch(requestCode){
+//            case REQUEST_CODE:
+//                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+//                    mText.setText("");
+//                } else {
+//
+//                }
+//                break;
+//        }
     }
 
     private void onButtonClick() {
@@ -59,7 +127,7 @@ public class TimerListActivity extends AppCompatActivity {
      * @param times DB から取得した SetTime
      */
     public void updateRecyclerView(List<Time> times) {
-        TimeRecyclerViewAdapter adapter = new TimeRecyclerViewAdapter(times);
+        TimeRecyclerViewAdapter adapter = new TimeRecyclerViewAdapter(context, times);
         LinearLayoutManager layout = new LinearLayoutManager(this);
         _rv.setLayoutManager(layout);
         _rv.setAdapter(adapter);
