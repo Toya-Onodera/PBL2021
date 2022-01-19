@@ -33,7 +33,7 @@ public class GoTimerActivity extends AppCompatActivity implements JapanNewsManag
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_go_timer);
 
-        timerStopButton = findViewById(R.id.timetStopTextButton);
+        timerStopButton = findViewById(R.id.timerStopTextButton);
         answerTextView = findViewById(R.id.answerText);
         speechPreviewTextView = findViewById(R.id.speechPreviewText);
 
@@ -61,7 +61,6 @@ public class GoTimerActivity extends AppCompatActivity implements JapanNewsManag
         mediaManager.start();
         speechRecognizerManager.start();
 
-        // FIXME: 習得したニュースタイトルの受け渡しができていない
         answerText = speechText;
         answerTextView.setText(speechText);
     }

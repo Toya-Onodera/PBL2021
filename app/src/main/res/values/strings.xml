@@ -4,4 +4,6 @@
     <string name="textView">00:00</string>
     <string name="alarmStyleText">アラーム</string>
     <string name="stopAlarmButtonText">アラーム停止</string>
+    <string name="answerTextHeading">読み取り結果</string>
+    <string name="speechPreviewHeading">読み上げる文</string>
 </resources>
